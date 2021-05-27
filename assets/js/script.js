@@ -1,14 +1,28 @@
 var formEl = document.querySelector("#task-form");
 var tasksToDoEl = document.querySelector("#tasks-to-do");
 
-var createTaskHandler = function(event) {
+var taskFormHandler = function(event) {
 
   event.preventDefault();
     var taskNameInput = document.querySelector("input[name='task-name']").value;
     var taskTypeInput = document.querySelector("Select[name='task-type']").value;
 
+    // package up data as an object
+    var taskDataOvj = {
+      name: taskNameInput,
+      type: taskTypeInput
+    };
 
- // create list item
+    // Send it as an argument to createTaskEl
+    createTaskEl(taskDataOvj);
+}; //hmmm
+
+
+// item that holds the code that creates a mew task HTML element
+var createTaskEl = function(taskDataOvj) {
+
+    //copy and pasted from taskFormHandler
+  // create list item
  var listItemEl = document.createElement("li");
  listItemEl.className = "task-item";
 
@@ -18,11 +32,12 @@ var createTaskHandler = function(event) {
  taskInfoEl.className = "task-info";
  
  // add HTML to div
- taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskNameInput + "</h3><span class='task-type'>" + taskTypeInput + "</span>";
+ taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataOvj.name + "</h3><span class='task-type'>" + taskDataOvj.type + "</span>";
  listItemEl.appendChild(taskInfoEl);
 
  // add entire list item to list
  tasksToDoEl.appendChild(listItemEl);
+
 };
 
-formEl.addEventListener("submit", createTaskHandler);
+formEl.addEventListener("submit", taskFormHandler);
