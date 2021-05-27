@@ -7,6 +7,15 @@ var taskFormHandler = function(event) {
     var taskNameInput = document.querySelector("input[name='task-name']").value;
     var taskTypeInput = document.querySelector("Select[name='task-type']").value;
 
+    //Check if input vlues are emtpy strings 
+    if (!taskNameInput || !taskTypeInput) {
+      alert("You need to fill out the task form");
+      return false;
+    }
+
+    //reset form
+    formEl.reset();
+
     // package up data as an object
     var taskDataOvj = {
       name: taskNameInput,
